@@ -27234,27 +27234,27 @@ class MainView extends (0, _reactDefault.default).Component {
                     Title: "Inception",
                     Description: "desc1...",
                     Genre: "Action",
-                    Director: "loremLips",
+                    Director: "cool director",
                     Actors: "Dylon, Mike, John",
-                    ImageURL: "..."
+                    ImageURL: "https://2.bp.blogspot.com/_ej-z27dLP7M/TSCSe45IHVI/AAAAAAAAACs/MxM5ol_aVrY/s1600/inception2d6587339.jpg"
                 },
                 {
                     _id: 2,
                     Title: "The Shawshank Redemption",
                     Description: "desc2...",
                     Genre: "Action",
-                    Director: "loremLips",
+                    Director: "cool director",
                     Actors: "Dylon, Mike, John",
-                    ImageURL: "..."
+                    ImageURL: "https://files.kstatecollegian.com/2015/06/c4728ae2-cf07-4ae6-af7e-34cf3cb38dbe.jpg"
                 },
                 {
                     _id: 3,
                     Title: "Gladiator",
                     Description: "desc3...",
                     Genre: "Action",
-                    Director: "loremLips",
+                    Director: "cool director",
                     Actors: "Dylon, Mike, John",
-                    ImageURL: "..."
+                    ImageURL: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Jn2aw3ZcXQd1ZXu00NnmBgHaLH%26pid%3DApi&f=1"
                 }, 
             ]
         };
@@ -27272,7 +27272,7 @@ class MainView extends (0, _reactDefault.default).Component {
             children: " The list is empty!"
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 53,
+            lineNumber: 56,
             columnNumber: 14
         }, this);
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27284,7 +27284,7 @@ class MainView extends (0, _reactDefault.default).Component {
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 58,
+                lineNumber: 61,
                 columnNumber: 11
             }, this) : movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                     movieData: movie,
@@ -27293,12 +27293,12 @@ class MainView extends (0, _reactDefault.default).Component {
                     }
                 }, movie._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 66,
+                    lineNumber: 69,
                     columnNumber: 13
                 }, this))
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 56,
+            lineNumber: 59,
             columnNumber: 7
         }, this);
     }
@@ -27430,19 +27430,18 @@ class MovieView extends (0, _reactDefault.default).Component {
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    className: "movie-genre",
+                    className: "movie-director",
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                             className: "label",
-                            children: "Genre: "
+                            children: "Director: "
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
                             lineNumber: 20,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                            className: "value",
-                            children: movieData.Genre
+                            children: movieData.Director
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
                             lineNumber: 21,
@@ -27454,6 +27453,31 @@ class MovieView extends (0, _reactDefault.default).Component {
                     lineNumber: 19,
                     columnNumber: 9
                 }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "movie-genre",
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                            className: "label",
+                            children: "Genre: "
+                        }, void 0, false, {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 24,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                            className: "value",
+                            children: movieData.Genre
+                        }, void 0, false, {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 25,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/movie-view/movie-view.jsx",
+                    lineNumber: 23,
+                    columnNumber: 9
+                }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                     onClick: ()=>{
                         onBackClick(null);
@@ -27461,7 +27485,7 @@ class MovieView extends (0, _reactDefault.default).Component {
                     children: "Back"
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 24,
+                    lineNumber: 28,
                     columnNumber: 9
                 }, this)
             ]
