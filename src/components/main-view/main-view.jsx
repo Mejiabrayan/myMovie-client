@@ -11,24 +11,27 @@ export class MainView extends React.Component {
           _id: 1,
           Title: 'Inception',
           Description: 'desc1...',
-          Genre:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis vitae et leo duis ut. Id donec ultrices tincidunt arcu non. ',
+          Genre: 'Action',
+          Director: 'loremLips',
+          Actors: 'Dylon, Mike, John',
           ImageURL: '...',
         },
         {
           _id: 2,
           Title: 'The Shawshank Redemption',
           Description: 'desc2...',
-          Genre:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis vitae et leo duis ut. Id donec ultrices tincidunt arcu non. ',
+          Genre: 'Action',
+          Director: 'loremLips',
+          Actors: 'Dylon, Mike, John',
           ImageURL: '...',
         },
         {
           _id: 3,
           Title: 'Gladiator',
           Description: 'desc3...',
-          Genre:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis vitae et leo duis ut. Id donec ultrices tincidunt arcu non. ',
+          Genre: 'Action',
+          Director: 'loremLips',
+          Actors: 'Dylon, Mike, John',
           ImageURL: '...',
         },
       ],
@@ -44,7 +47,8 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie } = this.state;
 
-    if (selectedMovie) return <MovieView movieData={selectedMovie} />;
+    // if (selectedMovie) return <MovieView movieData={selectedMovie} />;
+
     if (movies.length === 0)
       return <div className='main-view'> The list is empty!</div>;
 
@@ -52,7 +56,7 @@ export class MainView extends React.Component {
       <div className='main-view'>
         {selectedMovie ? (
           <MovieView
-            movie={selectedMovie}
+            movieData={selectedMovie}
             onBackClick={(newSelectedMovie) => {
               this.setSelectedMovie(newSelectedMovie);
             }}
