@@ -1,4 +1,6 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import axios from 'axios';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -33,7 +35,7 @@ export class MainView extends React.Component {
 
   onLoggedIn(user) {
     this.setState({
-      user,
+      user
     });
   }
 
@@ -42,30 +44,35 @@ export class MainView extends React.Component {
     const { movies, selectedMovie, user } = this.state;
 
     if (!user)
-      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />; // If the user isn't logged in, the LoginView is rendered. This is done by checking whether the user state is null or not. 
+      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />; // If the user isn't logged in, the LoginView is rendered. This is done by checking whether the user state is null or not.
 
     if (movies.length === 0) return <div className='main-view' />;
     return (
-      <div className='main-view'>
-        {selectedMovie ? (
-          <MovieView
-            movieData={selectedMovie}
-            onBackClick={(newSelectedMovie) => {
-              this.setSelectedMovie(newSelectedMovie);
-            }}
-          />
-        ) : (
-          movies.map((movie) => (
-            <MovieCard
-              key={movie._id}
-              movieData={movie}
-              onMovieClick={(movie) => {
-                this.setSelectedMovie(movie);
+      <Container>
+        <div className='main-view'>
+          {selectedMovie ? (
+
+            <Row>
+            <MovieView
+              movieData={selectedMovie}
+              onBackClick={(newSelectedMovie) => {
+                this.setSelectedMovie(newSelectedMovie);
               }}
             />
-          ))
-        )}
-      </div>
+            </Row>
+          ) : (
+            movies.map((movie) => (
+              <MovieCard
+                key={movie._id}
+                movieData={movie}
+                onMovieClick={(movie) => {
+                  this.setSelectedMovie(movie);
+                }}
+              />
+            ))
+          )}
+        </div>
+      </Container>
     );
   }
 }

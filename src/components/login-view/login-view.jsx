@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 // LoginView is a child component of MainView and is rendered as a child of MainView when the user is not logged in (i.e. when the user is not authenticated) and the state of the user is set to null.
-export function LoginView({ onLoggedIn }) { 
+export function LoginView({ onLoggedIn }) {
   const [username, setUsername] = useState(''); // initial value of username is an empty string
   const [password, setPassword] = useState(''); // initial value of password is an empty string
 
@@ -15,27 +17,24 @@ export function LoginView({ onLoggedIn }) {
   };
 
   return (
-    <form>
-      <label>
-        Username:{' '}
-        {/* empty string to add a space between the label and the input field */}
-        <input
-          type='text'
-          value={username} // value of the input field is bound to the username state
-          onChange={(e) => setUsername(e.target.value)} // when a user types in the input field, the setUsername function is called to update the username state to the value of the input field (e.target.value)
+    <Form>
+      <Form.Group className='mb-3' controlId='formUsername'>
+        <Form.Label> Username: </Form.Label>
+        <Form.Control
+          type='username'
+          placeholder="Enter Username"
+          onChange={(e) => setUsername(e.target.value)}
         />
-      </label>
-      <label>
-        Password:{' '}
-        <input
-          type='text'
-          value={password}
+      </Form.Group>
+      <Form.Group controlId='formPassword'>
+        <Form.Label> Password: </Form.Label>
+        <Form.Control
+          type='password'
+          placeholder="Enter Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-      </label>
-      <button type='submit' onClick={handleSubmit}>
-        Submit
-      </button>
-    </form>
-  );
+        <Button variant='primary' type='submit' onClick={handleSubmit}>Submit</Button>
+      </Form.Group>
+    </Form>
+  )
 }
