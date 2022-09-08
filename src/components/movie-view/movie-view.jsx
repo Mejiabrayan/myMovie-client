@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export class MovieView extends React.Component {
   keypressCallback(event) {
     console.log(event.key);
@@ -14,7 +15,7 @@ export class MovieView extends React.Component {
   render() {
     const { movieData, onBackClick } = this.props;
     return (
-      <div className='movie-view'>
+      <div className='movie-view img-rounded'>
         <div className='movie-poster'>
           <img src={movieData.ImageURL} />
         </div>
@@ -30,7 +31,14 @@ export class MovieView extends React.Component {
           <span className='label'>Director: </span>
           <span>{movieData.Director.Name}</span>
         </div>
-        <div className='director-bio'>{movieData.Director.Bio}</div>
+        <div className='director-bio'>
+          <span className='label'> Bio: </span>s
+          <span className='value'> {movieData.Director.Bio}</span>
+        </div>
+        <div className='actors'>
+          <span className='label'>Actors: </span>
+          <span className='value'> {movieData.Actors}</span>
+        </div>
         <div className='movie-genre'>
           <span className='label'>Genre: </span>
           <span className='value'>{movieData.Genre.Name}</span>
@@ -39,6 +47,11 @@ export class MovieView extends React.Component {
           <span className='label'>Description:</span>
           <span className='value'>{movieData.Genre.Description}</span>
         </div>
+{/* 
+        <div className='featured'>
+          <span className='label'>Featured: </span>
+          <span className='value'>{movieData.Featured}</span>
+        </div> */}
 
         <button
           onClick={() => {

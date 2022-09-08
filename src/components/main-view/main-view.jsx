@@ -1,6 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -35,7 +36,7 @@ export class MainView extends React.Component {
 
   onLoggedIn(user) {
     this.setState({
-      user
+      user,
     });
   }
 
@@ -48,31 +49,31 @@ export class MainView extends React.Component {
 
     if (movies.length === 0) return <div className='main-view' />;
     return (
-      <Container>
-        <div className='main-view'>
-          {selectedMovie ? (
-
-            <Row>
+      <Row className='main-view justify-content-md-center'>
+        {selectedMovie ? (
+          <Col md={8}>
             <MovieView
               movieData={selectedMovie}
               onBackClick={(newSelectedMovie) => {
                 this.setSelectedMovie(newSelectedMovie);
               }}
             />
-            </Row>
-          ) : (
-            movies.map((movie) => (
+          </Col>
+        ) : (
+          movies.map((movie) => (
+            <Col md={3}>
               <MovieCard
-                key={movie._id}
+                key={movie._id} // key is a special and reserved property in React (along with ref, a more advanced feature). When an element is created, React extracts the key property and stores the key directly on the returned element. Even though key may look like it belongs in props, key cannot be referenced using this.props.key. React automatically uses key to decide which components to update. A component cannot inquire about its key.
                 movieData={movie}
-                onMovieClick={(movie) => {
-                  this.setSelectedMovie(movie);
+                onMovieClick={(newSelectedMovie) => {
+                  this.setSelectedMovie(newSelectedMovie);
                 }}
               />
-            ))
-          )}
-        </div>
-      </Container>
+            </Col>
+          ))
+        )}
+        
+      </Row>
     );
   }
 }
