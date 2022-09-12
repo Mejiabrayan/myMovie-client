@@ -1,0 +1,27 @@
+.list-inline-item .btn-outline-info {
+  background-color: transparent;
+  color: #5a606b;
+  border: 1px solid #5a606b;
+  margin-bottom: 10px;
+  border-radius: 25px;
+  font-weight: 500;
+}
+
+.list-inline-item .btn-outline-info:hover {
+  color: #5a606b;
+  border-color: #5a606b;
+  transition: all 0.3s ease-in-out;
+  background-color: transparent;
+}
+
+.movie-view {
+    font-family: Poppins;
+}
+
+
+.movie-img {
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 20%;
+}
