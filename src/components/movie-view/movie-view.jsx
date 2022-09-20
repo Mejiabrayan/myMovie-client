@@ -33,6 +33,9 @@ export class MovieView extends React.Component {
                 </Button>
               </li>
             </ul>
+              <Link to={`/genres/${movie.Genre.Name}`}>
+              <Button variant='link'>More info</Button>
+            </Link>
           </Col>
         </Row>
         <Row className='movie-title'>
@@ -77,14 +80,14 @@ export class MovieView extends React.Component {
           </Col>
         </Row>
 
-        <Row className='genre-description'>
+        {/* <Row className='genre-description'>
           <Col>
             <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>
               DESCRIPTION{' '}
             </p>
             <p className='value'>{movie.Genre.Description}</p>
           </Col>
-        </Row>
+        </Row> */}
 
         <Button
           variant='primary'

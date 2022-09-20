@@ -9,6 +9,7 @@ import { ProfileView } from '../profile-view/profile-view';
 // import { UpdateUser } from '../profile-view/update-user';
 import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
+import { GenreView } from '../genre-view/genre-view';
 import { MenuBar } from '../navbar/navbar';
 
 export class MainView extends React.Component {
@@ -174,21 +175,17 @@ export class MainView extends React.Component {
           <Route
             path='/genres/:name'
             render={({ match, history }) => {
-              console.log('error');
               if (!user)
                 return (
                   <Col>
-                    {' '}
-                    <LoginView
-                      onLoggedIn={(user) => this.onLoggedIn(user)}
-                    />{' '}
+                    <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                   </Col>
                 );
-              if (!movies) return <div className='main-view' />;
+              if (movies.length === 0) return <div className='main-view' />;
               return (
                 <Col md={8}>
                   <GenreView
-                    genres={movies.find(
+                    genre={movies.find(
                       (m) => m.Genre.Name === match.params.name
                     )}
                     onBackClick={() => history.goBack()}
