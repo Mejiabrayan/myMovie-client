@@ -1,6 +1,6 @@
-import { Collapse } from 'bootstrap';
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
@@ -15,12 +15,12 @@ export class MovieView extends React.Component {
     document.removeEventListener('keypress', this.keypressCallback);
   }
   render() {
-    const { movieData, onBackClick } = this.props;
+    const { movie, onBackClick } = this.props;
     return (
       <Container className='movie-view'>
         <Row className='movie-poster'>
-          <Col class='movie-img'>
-            <img src={movieData.ImageURL} className='img-fluid' />
+          <Col className='movie-img'>
+            <img src={movie.ImageURL} className='img-fluid' />
           </Col>
         </Row>
         <Row className='movie-genre mt-3'>
@@ -29,7 +29,7 @@ export class MovieView extends React.Component {
             <ul className='list-inline'>
               <li className='list-inline-item'>
                 <Button type='button' className='btn btn-outline-info'>
-                  {movieData.Genre.Name}
+                  {movie.Genre.Name}
                 </Button>
               </li>
             </ul>
@@ -38,17 +38,20 @@ export class MovieView extends React.Component {
         <Row className='movie-title'>
           <Col>
             <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>TITLE</p>
-            <p>{movieData.Title}</p>
+            <p>{movie.Title}</p>
           </Col>
         </Row>
         <Row className='movie-description'>
           <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>OVERVIEW</p>
-          <p className='value'> {movieData.Description}</p>
+          <p className='value'> {movie.Description}</p>
         </Row>
         <Row className='movie-director'>
           <Col>
             <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>DIRECTOR</p>
-            <p>{movieData.Director.Name}</p>
+            <p>{movie.Director.Name}</p>
+            <Link to={`/directors/${movie.Director.Name}`}>
+              <Button variant='link'>More info</Button>
+            </Link>
           </Col>
         </Row>
 
@@ -56,7 +59,7 @@ export class MovieView extends React.Component {
         <Row className='director-profile'>
           <Col className='col-md-3 text-center'>
             <img
-              src={movieData.Director.profile}
+              src={movie.Director.profile}
               className='profile img-fluid rounded-circle mx-auto d-block'
             ></img>
           </Col>
@@ -64,13 +67,13 @@ export class MovieView extends React.Component {
         <Row className='director-bio'>
           <Col>
             <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>BIO</p>
-            <p> {movieData.Director.Bio}</p>
+            <p> {movie.Director.Bio}</p>
           </Col>
         </Row>
         <Row className='actors'>
           <Col>
             <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>ACTORS</p>
-            <p className='value'> {movieData.Actors}</p>
+            <p className='value'> {movie.Actors}</p>
           </Col>
         </Row>
 
@@ -79,7 +82,7 @@ export class MovieView extends React.Component {
             <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>
               DESCRIPTION{' '}
             </p>
-            <p className='value'>{movieData.Genre.Description}</p>
+            <p className='value'>{movie.Genre.Description}</p>
           </Col>
         </Row>
 

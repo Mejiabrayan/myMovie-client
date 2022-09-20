@@ -1,7 +1,3 @@
-.my-movie {
-  color: #4682b4;
-}
-
 .list-inline-item .btn-outline-info {
   color: #5a606b;
   background-color: #0000;
@@ -62,4 +58,8 @@ button {
 
 
 
-/*# sourceMappingURL=index.ce1d6491.css.map */
+h1, h2, h3, p {
+  font-family: Poppins;
+}
+
+/*# sourceMappingURL=index.5f1df611.css.map */
