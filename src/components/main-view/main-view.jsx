@@ -1,16 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 import { Row, Col } from 'react-bootstrap';
+import Spinner from 'react-bootstrap/Spinner';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { ProfileView } from '../profile-view/profile-view';
-// import { UpdateUser } from '../profile-view/update-user';
 import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { MenuBar } from '../navbar/navbar';
+import { UpdateUser } from '../profile-view/update-user';
 
 export class MainView extends React.Component {
   constructor() {
@@ -47,6 +48,8 @@ export class MainView extends React.Component {
       });
   }
 
+
+
   // When a user successfully logs in, this function updates the user property in state to that particular user (which is passed in as an argument to this function) and sets the selectedMovie property to null.
 
   onLoggedIn(authData) {
@@ -79,9 +82,9 @@ export class MainView extends React.Component {
     const { movies, user } = this.state;
 
     if (!movies)
-      return (
-        <div className='main-view'> This list is empty. loading info...</div>
-      );
+      return function growSpinner() {
+        return <Spinner animation='grow' />;
+      };
 
     return (
       <Router>
@@ -209,6 +212,20 @@ export class MainView extends React.Component {
                 <Col md={8}>
                   <ProfileView
                     movies={movies}
+                    user={user}
+                    onBackClick={() => history.goBack()}
+                  />
+                </Col>
+              );
+            }}
+          />
+          <Route
+            path={`/user-update/${user}`}
+            render={({ match, history }) => {
+              if (!user) return <Redirect to='/' />;
+              return (
+                <Col>
+                  <UpdateUser
                     user={user}
                     onBackClick={() => history.goBack()}
                   />

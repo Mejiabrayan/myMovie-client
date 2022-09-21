@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './movie-view.scss';
 
+
 export class MovieView extends React.Component {
   keypressCallback(event) {
     console.log(event.key);
@@ -14,13 +15,27 @@ export class MovieView extends React.Component {
   componentWillUnmount() {
     document.removeEventListener('keypress', this.keypressCallback);
   }
+
+
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movie, onBackClick, addFavorite} = this.props;
     return (
       <Container className='movie-view'>
         <Row className='movie-poster'>
           <Col className='movie-img'>
             <img src={movie.ImageURL} className='img-fluid' />
+          </Col>
+        </Row>
+        <Row className='add-movie'>
+          <Col>
+            <Button
+              className='add-movie-button mt-3'
+              variant='outline-primary'
+              size='sm'
+             
+            >
+              Add to Favorites 
+            </Button>
           </Col>
         </Row>
         <Row className='movie-genre mt-3'>
@@ -33,7 +48,7 @@ export class MovieView extends React.Component {
                 </Button>
               </li>
             </ul>
-              <Link to={`/genres/${movie.Genre.Name}`}>
+            <Link to={`/genres/${movie.Genre.Name}`}>
               <Button variant='link'>More info</Button>
             </Link>
           </Col>
@@ -80,24 +95,16 @@ export class MovieView extends React.Component {
           </Col>
         </Row>
 
-        {/* <Row className='genre-description'>
+        <Row className='movie-back'>
           <Col>
-            <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>
-              DESCRIPTION{' '}
-            </p>
-            <p className='value'>{movie.Genre.Description}</p>
+            <Button variant='primary' type='submit' onClick={() => onBackClick()}>
+              Back
+            </Button>
           </Col>
-        </Row> */}
-
-        <Button
-          variant='primary'
-          onClick={() => {
-            onBackClick(null);
-          }}
-        >
-          Back
-        </Button>
+       
+        </Row>
       </Container>
     );
   }
 }
+

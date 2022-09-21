@@ -1,18 +1,22 @@
 import React from 'react';
 import { Nav, Navbar, Button, Container } from 'react-bootstrap';
 
-export function MenuBar({ user }) {
-  // Sign ou method
-  const onLoggedOut = () => {
+export function MenuBar() {
+  const user = localStorage.getItem('user');
+
+  // Sign out method
+  const logOut = (e) => {
+    e.preventDefault();
     localStorage.clear();
     window.open('/', '_self');
   };
 
-  // Token Method
+  // Conditional rendering of the menu bar
   const isAuth = () => {
     if (typeof window === 'undefined') {
       return false;
     }
+    // If user is logged in return true else return false and render the login button in the menu bar
     if (localStorage.getItem('token')) {
       return localStorage.getItem('token');
     } else {
@@ -30,19 +34,14 @@ export function MenuBar({ user }) {
     >
       <Container className='fluid'>
         <Navbar.Brand className='navbar-logo' href='/'>
-          myMovies
+          myMovies 🍿
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav ' />
         <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='me-auto'>
+          <Nav className='ml-auto'>
             {isAuth() && <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>}
             {isAuth() && (
-              <Button
-                variant='link'
-                onClick={() => {
-                  this.onLoggedOut();
-                }}
-              >
+              <Button variant='link' onClick={logOut}>
                 Logout
               </Button>
             )}

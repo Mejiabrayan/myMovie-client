@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container, Row } from 'react-bootstrap';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -9,6 +9,7 @@ export function UpdateUser({ user }) {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
+
 
   const [values, setValues] = useState({
     usernameError: '',
@@ -26,10 +27,10 @@ export function UpdateUser({ user }) {
         usernameError: 'Username is required',
       });
       isReq = false;
-    } else if (username.length < 5) {
+    } else if (username.length < 2) {
       setValues({
         ...values,
-        usernameError: 'Username must be 5 characters or more',
+        usernameError: 'Username must be 2 characters or more',
       });
       isReq = false;
     }
@@ -62,9 +63,9 @@ export function UpdateUser({ user }) {
     return isReq;
   };
 
+  // Handle user input
   const handleSubmit = (e) => {
     e.preventDefault;
-
     let isReq = validate();
 
     if (isReq) {
@@ -78,6 +79,7 @@ export function UpdateUser({ user }) {
             Password: password,
             Email: email,
             Birthday: birthday,
+            FavoriteMovies: favoriteMovies,
           },
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -86,7 +88,7 @@ export function UpdateUser({ user }) {
         .then((response) => {
           console.log(response);
           alert('Profile was succesfully updated');
-          window.open('/', '_self');
+          window.open('/users/:username', '_self');
         })
         .catch((error) => {
           console.log(`There is an ${error}`);
@@ -95,49 +97,63 @@ export function UpdateUser({ user }) {
     }
   };
 
-  <Form className='profile-form' onSubmit={(e) => handleSubmit(e)}>
-    <Form.Group>
-      <h3>Want to change something?</h3>
-      <Form.Label>Username:</Form.Label>
-      <Form.Control
-        type='text'
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-        placeholder='enter username'
-      />
-      {values.usernameError && <p>{values.usernameError}</p>}
-    </Form.Group>
-    <Form.Group>
-      <Form.Label>Password:</Form.Label>
-      <Form.Control
-        type='password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        placeholder='enter password'
-      />
-      {values.passwordError && <p>{values.passwordError}</p>}
-    </Form.Group>
-    <Form.Group>
-      <Form.Label> Email Address </Form.Label>
-      <Form.Control
-        type='email'
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      {/* Displays Error */}
-      {values.emailError && <p>{values.emailError}</p>}
-      <Form.Group>
-        <Form.Label> Birthday </Form.Label>
-        <Form.Control
-          value={birthday}
-          onChange={(e) => setBirthday(e.target.value)}
-        />
-      </Form.Group>
-      <Button variant='primary' type='submit'>
-        Update
-      </Button>
-    </Form.Group>
-  </Form>;
+  return (
+    <Container className='mt-4'>
+      <Row>
+        <h3>Update Profile</h3>
+      </Row>
+      <Form className='profile-form' onSubmit={(e) => handleSubmit(e)}>
+        <Form.Group>
+          <h5>Want to change something?</h5>
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            type='text'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            placeholder='Enter Username'
+          />
+          {values.usernameError && <p>{values.usernameError}</p>}
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
+            type='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='Enter Password'
+          />
+          {values.passwordError && <p>{values.passwordError}</p>}
+        </Form.Group>
+        <Form.Group>
+          <Form.Label> Email Address </Form.Label>
+          <Form.Control
+            type='email'
+            value={email}
+            placeholder='Enter Email'
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {/* Displays Error */}
+          {values.emailError && <p>{values.emailError}</p>}
+          <Form.Group>
+            <Form.Label> Birthday </Form.Label>
+            <Form.Control
+              value={birthday}
+              placeholder='Enter Birthday'
+              onChange={(e) => setBirthday(e.target.value)}
+            />
+          </Form.Group>
+
+          <Button
+            className='mt-3'
+            variant='primary'
+            type='submit'
+            onClick={handleSubmit}
+          >
+            Update Profile
+          </Button>
+        </Form.Group>
+      </Form>
+    </Container>
+  );
 }

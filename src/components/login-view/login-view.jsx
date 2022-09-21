@@ -52,7 +52,7 @@ export function LoginView(props) {
   };
 
   return (
-    <Form>
+    <Form className='mt-4'>
       <Form.Group controlId='formUsername'>
         <Form.Label>Username:</Form.Label>
         <Form.Control
@@ -76,7 +76,7 @@ export function LoginView(props) {
         {/* code added here to display validation error */}
         {passwordErr && <p>{passwordErr}</p>}
       </Form.Group>
-      <Button variant='primary' type='submit' onClick={handleSubmit}>
+      <Button className='mt-2' variant='primary' type='submit' onClick={handleSubmit}>
         Login
       </Button>
     </Form>
