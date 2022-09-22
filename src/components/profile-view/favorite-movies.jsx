@@ -1,82 +1,21 @@
-import React, { Fragment } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button, Card, Col } from 'react-bootstrap';
-
-import './profile-view.scss';
-
-export function FavoriteMovies(props) {
-  const { movies, favoriteMovies, currentUser, token } = props;
-
-  // favoriteMovies is an array of movie IDs
-  const favoriteMoviesId = favoriteMovies.map((m) => m._id);
-  const favoriteMoviesList = movies.filter((m) => {
-    return favoriteMoviesId.includes(m._id);
-  });
-  console.log(favoriteMoviesList);
-
-  const handleMovieDelete = (movieId) => {
-    axios
-      .delete(
-        `https://mymoviesapi2023.herokuapp.com/users/${currentUser}/movies/${movieId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-        alert(`The movie was successfully deleted.`);
-        window.open('/users/:username', '_self');
-      })
-      .catch((error) => console.error(error));
-  };
-
-
+export function FavoriteMovies(favoriteMoviesList) {
   return (
-    <Fragment>
-      {favoriteMoviesList.length === 0 ? (
-        <p className='text-muted'>You have no favorite movies yet.</p>
-      ) : (
-        favoriteMoviesList.map((movie) => {
-          return (
-            <Col xs={10} sm={8} md={6} lg={4}>
-              <Card id='movie-card'>
-                <Link to={`/movies/${movie._id}`}>
-                  <Card.Img variant='top' src={movie.ImageURL} />
+    <div>
+      <h2>Favorite Movies</h2>
 
-                </Link>
-                <Card.Body>
-                  <Card.Title>{movie.Title}</Card.Title>
-                  <Card.Text>{movie.Description}</Card.Text>
-                  <Link to={`/movies/${movie._id}`}>
-
-
-                    <Button
-                      className='button'
-                      variant='outline-primary'
-                      size='sm'
-                    >
-                      Open
-                    </Button>
-                  </Link>
-
-                  <Button
-                    className='button ml-2'
-                    variant='outline-primary'
-                    size='sm'
-                    onClick={() => {
-                      handleMovieDelete(movie._id);
-                    }}
-                  >
-                    Remove
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          );
-        })
-      )}
-    </Fragment>
+      {favoriteMoviesList.map((movie) => {
+        return (
+          <div key={movie._id}>
+            <img src={movie.ImageURL} alt={movie.Title} />
+            <Link to={`/movies/${movie._id}`}>
+              <h4>{movie.Title}</h4>
+            </Link>
+          </div>
+        );
+      })}
+    </div>
   );
 }
