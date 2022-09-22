@@ -1,102 +1,180 @@
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import propTypes from 'prop-types';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { UpdateUser } from './update-user';
-import { FavoriteMovies } from './favorite-movies';
+import { Link } from 'react-router-dom';
+
+import './profile-view.scss';
+
+import { Container, Col, Row, Button, Card, Form } from 'react-bootstrap';
 
 export function ProfileView(props) {
-  // Delcares a Hook
-  const [user, setUser] = useState(props.user);
-  const [movies, setMovies] = useState(props.movies);
-  const [favoriteMovies, setFavoriteMovies] = useState([]); // inital empty array that holds your list of favorite movies
-  const currentUser = localStorage.getItem('user');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [favoriteMovies, setFavoriteMovies] = useState({});
+  const [email, setEmail] = useState('');
+  const [birthday, setBirthday] = useState('');
+
+  const [user, setUserData] = useState('');
+  const [movies, setMovies] = useState([]);
+  const User = localStorage.getItem('user');
   const token = localStorage.getItem('token');
+  const [favoriteMoviesList, setFavoriteMoviesList] = useState([]);
 
-
-
-  // useEffect is a hook that is used to perform side effects in function components
-  const getUser = () => {
+  const getUserData = () => {
+    let user = localStorage.getItem('user');
+    let token = localStorage.getItem('token');
     axios
-      .get(`https://mymoviesapi2023.herokuapp.com/users/${currentUser}`, {
+      .get(`https://mymoviesapi2023.herokuapp.com/users/${user}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        setUser(response.data);
-        setFavoriteMovies(response.data.FavoriteMovies);
+        setUsername(response.data.Username);
+        setEmail(response.data.Email);
+        setUserData(response.data);
+        setFavoriteMoviesList(response.data.FavoriteMovies);
+        console.log(response);
+
+        response.data.FavoriteMovies.forEach((movie_id) => {
+          let favMovies = props.movies.filter(
+            (movie) => movie._id === movie_id
+          );
+          setMovies(favMovies);
+        });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.error(error));
   };
 
-  // useEffect is a hook that is used to perform side effects in function components
+  // Delete Profile
+  const handleDelete = (e) => {
+    const user = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios.delete(`https://mymoviesapi2023.herokuapp.com/users/${user}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    alert(`The account ${user.Username} was successfully deleted.`);
+    localStorage.clear();
+    window.open('/register', '_self');
+  };
+  // Update Profile
+  const handleUpdate = () => {
+    let user = localStorage.getItem('user');
+    let token = localStorage.getItem('token');
+
+    axios
+      .put(
+        `https://mymoviesapi2023.herokuapp.com/users/${user}`,
+        {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+
+      .then((response) => {
+        alert('Your profile has been updated');
+        localStorage.setItem('user', response.data.Username),
+          console.log(response.data);
+        window.open('/', '_self');
+      })
+      .catch((e) => {
+        console.log('Error');
+      });
+  };
 
   useEffect(() => {
-    getUser();
+    getUserData();
   }, []);
 
-  const handleDelete = () => {
-    axios
-      .delete(`https://mymoviesapi2023.herokuapp.com/users/${currentUser}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(() => {
-        alert(`The account ${user.Username} was successfully deleted`);
-        localStorage.clear();
-        window.open('/register', 'self');
-      })
-      .catch((error) => {
-        console.log(`there is a problem 🧐 ${error}`);
-      });
-  };
-
   return (
-    <Card id='profile-form' className='mt-3'>
-      <Card.Body>
-        <Card.Title>Profile</Card.Title>
-      </Card.Body>
-      <Card.Body>
-        <Card.Text className='label'>Username:</Card.Text>
-        <Card.Text className='value'>{user.Username}</Card.Text>
-      </Card.Body>
-
-      <Card.Body className='mt-3'>
-        <Card.Text className='label'>Password:</Card.Text>
-        <Card.Text className='value'>******</Card.Text>
-      </Card.Body>
-      <Card.Body className='mt-3'>
-        <Card.Text className='label'>Email:</Card.Text>
-        <Card.Text className='value'>{user.Email}</Card.Text>
-      </Card.Body>
-      <Card.Body className='mt-3'>
-        <Card.Text className='label'>Birthday:</Card.Text>
-        <Card.Text className='value'>{user.Birthday}</Card.Text>
-      </Card.Body>
-      <Card.Body className='mt-3'>
-       <Button variant='secondary' href={`/user-update/${currentUser}`}> Update Profile</Button>
-      </Card.Body>
-      <Card.Body className='mt-5'>
-        <h4>Your favorite movies</h4>
-      </Card.Body>
-      <Card.Body className='mt-3'>
-        <FavoriteMovies
-          movies={movies}
-          favoriteMovies={favoriteMovies}
-          currentUser={currentUser}
-          token={token}
-        />
-      </Card.Body>
-      <Card.Body className='mt-5'>
-        <UpdateUser user={user} />
-        <Button
-          className='d-block mt-5'
-          variant='danger'
-          onClick={handleDelete}
-        >
-          Delete profile
+    <Container>
+      <Row>
+        <h3>Profile</h3>
+      </Row>
+      <Form>
+        <Form.Group className='mb-3' controlId='username'>
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            type='text'
+            placeholder='username'
+          />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='password'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            onChange={(e) => setPassword(e.target.value)}
+            type='password'
+            value={password}
+            placeholder='Password'
+          />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='email'>
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type='email'
+            placeholder='Enter new email'
+          />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='birthday'>
+          <Form.Label>Birthday:</Form.Label>
+          <Form.Control
+            onChange={(e) => setBirthday(e.target.value)}
+            value={birthday}
+            type='date'
+            placeholder='birthday'
+          />
+        </Form.Group>
+      </Form>
+      <Row>
+        <Button className='mt-2' onClick={handleUpdate}>
+          Update your profile
         </Button>
-      </Card.Body>
-    </Card>
+        <Button className='mt-2 ml-4' onClick={handleDelete}>
+          Delete your profile
+        </Button>
+      </Row>
+      <Row className='fav-list'>
+        <h4>Favorite Movies:</h4>
+      </Row>
+
+      <Row>
+        {favoriteMoviesList.map((movie) => {
+          return (
+            <Col xs={12} md={6} lg={3} >
+              <Link to={`/movies/${movie._id}`}>
+                <Card.Img
+                  className='mb-2'
+                  key={movie._id}
+                  src={movie.ImageURL}
+                  alt={movie.Title}
+                />
+              </Link>
+            </Col>
+          );
+        })}
+      </Row>
+    </Container>
   );
 }
+
+ProfileView.propTypes = {
+  user: propTypes.shape({
+    Username: propTypes.string.isRequired,
+    Password: propTypes.string.isRequired,
+    Email: propTypes.string.isRequired,
+    Birthday: propTypes.string.isRequired,
+    FavoriteMovies: propTypes.array.isRequired,
+  }),
+  Director: propTypes.shape({
+    Name: propTypes.string.isRequired,
+    Bio: propTypes.string.isRequired,
+    Birth: propTypes.string.isRequired,
+  })
+};
