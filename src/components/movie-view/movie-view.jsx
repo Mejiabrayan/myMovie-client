@@ -1,110 +1,115 @@
-import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import './movie-view.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
 
+import { Link } from "react-router-dom";
+import { Button, Container, Row, Col } from "react-bootstrap";
+
+import "./movie-view.scss";
 
 export class MovieView extends React.Component {
-  keypressCallback(event) {
-    console.log(event.key);
-  }
-  componentDidMount() {
-    document.addEventListener('keypress', this.keypressCallback);
+  constructor() {
+    super();
+
+    this.state = {
+      movies: [],
+      user: null,
+    };
   }
 
-  componentWillUnmount() {
-    document.removeEventListener('keypress', this.keypressCallback);
+  addMovie(movie, user) {
+    let username = localStorage.getItem("user");
+    let token = localStorage.getItem("token");
+    console.log(movie);
+    console.log(token);
+
+    axios
+      .post(
+        `https://mymoviesapi2023.herokuapp.com/users/${username}/movies/${movie._id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        console.log(response.data);
+        alert(`${movie.Title} has been added from your list.`);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
+  removeFavMovie = (movie, user) => {
+    let token = localStorage.getItem("token");
+    let username = localStorage.getItem("user");
+    console.log(movie);
+    console.log(token);
+    axios
+      .delete(
+        `https://mymoviesapi2023.herokuapp.com/users/${username}/movies/${movie._id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        alert(`${movie.Title} has been removed from your list.`);
+      })
+      .catch((e) => {
+        console.log("Error");
+      });
+  };
 
   render() {
-    const { movie, onBackClick, addFavorite} = this.props;
+    const { movie, user, onBackClick } = this.props;
+
     return (
-      <Container className='movie-view'>
-        <Row className='movie-poster'>
-          <Col className='movie-img'>
-            <img src={movie.ImageURL} className='img-fluid' />
+      <Container className="movie-view">
+        <Row>
+          <Col className="movie-poster">
+            <img src={movie.ImageURL} />
           </Col>
         </Row>
-        <Row className='add-movie'>
-          <Col>
-            <Button
-              className='add-movie-button mt-3'
-              variant='outline-primary'
-              size='sm'
-             
-            >
-              Add to Favorites 
-            </Button>
-          </Col>
+        <Row className="movie-title">
+          <Col className="label">Title: </Col>
+          <Col className="value">{movie.Title}</Col>
         </Row>
-        <Row className='movie-genre mt-3'>
-          <Col>
-            <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>GENRE </p>
-            <ul className='list-inline'>
-              <li className='list-inline-item'>
-                <Button type='button' className='btn btn-outline-info'>
-                  {movie.Genre.Name}
-                </Button>
-              </li>
-            </ul>
-            <Link to={`/genres/${movie.Genre.Name}`}>
-              <Button variant='link'>More info</Button>
-            </Link>
-          </Col>
+        <Row className="movie-description">
+          <Col className="label">Description: </Col>
+          <Col className="value">{movie.Description}</Col>
         </Row>
-        <Row className='movie-title'>
-          <Col>
-            <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>TITLE</p>
-            <p>{movie.Title}</p>
-          </Col>
+        <Row>
+          <Link to={`/directors/${movie.Director.Name}`}>
+            <Button variant="link">Director</Button>
+          </Link>
+          <Link to={`/genres/${movie.Genre.Name}`}>
+            <Button variant="link">Genre</Button>
+          </Link>
         </Row>
-        <Row className='movie-description'>
-          <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>OVERVIEW</p>
-          <p className='value'> {movie.Description}</p>
-        </Row>
-        <Row className='movie-director'>
-          <Col>
-            <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>DIRECTOR</p>
-            <p>{movie.Director.Name}</p>
-            <Link to={`/directors/${movie.Director.Name}`}>
-              <Button variant='link'>More info</Button>
-            </Link>
-          </Col>
-        </Row>
-
-        {/* Temporary; Testing  */}
-        <Row className='director-profile'>
-          <Col className='col-md-3 text-center'>
-            <img
-              src={movie.Director.profile}
-              className='profile img-fluid rounded-circle mx-auto d-block'
-            ></img>
-          </Col>
-        </Row>
-        <Row className='director-bio'>
-          <Col>
-            <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>BIO</p>
-            <p> {movie.Director.Bio}</p>
-          </Col>
-        </Row>
-        <Row className='actors'>
-          <Col>
-            <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>ACTORS</p>
-            <p className='value'> {movie.Actors}</p>
-          </Col>
-        </Row>
-
-        <Row className='movie-back'>
-          <Col>
-            <Button variant='primary' type='submit' onClick={() => onBackClick()}>
-              Back
-            </Button>
-          </Col>
-       
-        </Row>
+        <Button
+          
+          onClick={() => {
+            onBackClick(null);
+          }}
+        >
+          Back
+        </Button>
+        <Button
+          className="button ml-2"
+          onClick={() => {
+            this.addMovie(movie, user);
+          }}
+        >
+          Add to favorites
+        </Button>
+        <Button
+          className="button ml-2"
+          onClick={() => {
+            this.removeFavMovie(movie, user);
+          }}
+        >
+          Remove from favorites
+        </Button>
       </Container>
     );
   }
 }
-
