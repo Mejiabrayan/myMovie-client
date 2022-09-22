@@ -11,7 +11,6 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { MenuBar } from '../navbar/navbar';
-import { UpdateUser } from '../profile-view/update-user';
 
 export class MainView extends React.Component {
   constructor() {
@@ -20,6 +19,7 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       user: null, // new state property to keep track of the user (null by default)
+      selectedMovie: null, // new state property to keep track of the selected movie (null by default)
     };
   }
   componentDidMount() {
@@ -48,8 +48,6 @@ export class MainView extends React.Component {
       });
   }
 
-
-
   // When a user successfully logs in, this function updates the user property in state to that particular user (which is passed in as an argument to this function) and sets the selectedMovie property to null.
 
   onLoggedIn(authData) {
@@ -62,20 +60,6 @@ export class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
-  }
-
-  onLoggedOut(authData) {
-    localStorage.removeItem('token', authData.token);
-    localStorage.removeItem('user', authData.user.Username);
-    this.setState({
-      user: null,
-    });
-  }
-
-  onRegisterOut() {
-    this.setState({
-      isRegistered: null,
-    });
   }
 
   render() {
@@ -220,8 +204,8 @@ export class MainView extends React.Component {
             }}
           />
           <Route
-            path={`/user-update/${user}`}
-            render={({ match, history }) => {
+            path={`/users//user-update/${user}`}
+            render={({ history }) => {
               if (!user) return <Redirect to='/' />;
               return (
                 <Col>
