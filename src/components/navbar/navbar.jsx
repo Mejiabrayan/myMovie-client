@@ -1,6 +1,7 @@
 import React from 'react';
 import { Nav, Navbar, Button, Container } from 'react-bootstrap';
 
+
 export function MenuBar() {
   const user = localStorage.getItem('user');
 
@@ -39,7 +40,7 @@ export function MenuBar() {
         <Navbar.Toggle aria-controls='responsive-navbar-nav ' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='ml-auto'>
-            {isAuth() && <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>}
+            {isAuth() && <Nav.Link  href={`/users/${user}`}>{user}</Nav.Link>}
             {isAuth() && (
               <Button variant='link' onClick={logOut}>
                 Logout
