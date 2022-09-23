@@ -2,31 +2,22 @@
   color: #4682b4;
 }
 
-.list-inline-item .btn-outline-info {
-  color: #5a606b;
-  background-color: #0000;
-  border: 1px solid #5a606b;
-  border-radius: 25px;
-  margin-bottom: 10px;
-  font-weight: 500;
+.label {
+  font-weight: bold;
 }
 
-.list-inline-item .btn-outline-info:hover {
-  color: #5a606b;
-  background-color: #0000;
-  border-color: #5a606b;
-  transition: all .3s ease-in-out;
+.values {
+  margin-bottom: 20px;
 }
 
-.movie-view {
-  font-family: Poppins;
-}
-
-.movie-img {
-  width: 50%;
-  height: 20%;
-  justify-content: center;
-  align-items: center;
+.button {
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-left: 20px;
+  padding: 10px;
+  font-size: 16px;
 }
 
 .fav-movie {

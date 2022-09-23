@@ -3,7 +3,6 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-
 import './profile-view.scss';
 
 import { Container, Col, Row, Button, Card, Form } from 'react-bootstrap';
@@ -32,15 +31,12 @@ export function ProfileView(props) {
         setUsername(response.data.Username);
         setEmail(response.data.Email);
         setUserData(response.data);
-        setFavoriteMoviesList(response.data.FavoriteMovies);
+        setFavoriteMoviesList(
+          props.movies.filter((movie) =>
+            response.data.FavoriteMovies.includes(movie._id)
+          )
+        );
         console.log(response);
-
-        response.data.FavoriteMovies.forEach((movie_id) => {
-          let favMovies = props.movies.filter(
-            (movie) => movie._id === movie_id
-          );
-          setMovies(favMovies);
-        });
       })
       .catch((error) => console.error(error));
   };
@@ -145,46 +141,32 @@ export function ProfileView(props) {
       <Row className='fav-list'>
         <h4>Favorite Movies:</h4>
       </Row>
-      
 
-      <Row className='mb-3'   >
-       {movies.map((movie) => (
-          <Col className='mb-3' key={movie._id} xs={12} sm={6} md={4} lg={3}>
-            <Card className='movie-card'>
-              <Card.Img
-                className='movie-card-img'
-                variant='top'
-                src={movie.ImageURL}
-              />
-              <Card.Body>
-                <Card.Title className='movie-card-title'>
-                  {movie.Title}
-                </Card.Title>
-                <Link to={`/movies/${movie._id}`}>
-                  <Button className='mt-2' variant='link'>
-                    Open
-                  </Button>
-                </Link>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
+      <Row>
+        {favoriteMoviesList.map((movie) => {
+          return (
+            <Col xs={12} md={6} lg={3} key={movie._id}>
+              <Link to={`/movies/${movie._id}`}>
+                <Card.Img
+                  className="mb-2"
+                  src={movie.ImageURL}
+                  alt={movie.Title}
+                />
+              </Link>
+            </Col>
+          );
+        })}
       </Row>
     </Container>
   );
 }
 
 ProfileView.propTypes = {
-  user: propTypes.shape({
+  profileview: propTypes.shape({
     Username: propTypes.string.isRequired,
     Password: propTypes.string.isRequired,
     Email: propTypes.string.isRequired,
     Birthday: propTypes.string.isRequired,
     FavoriteMovies: propTypes.array.isRequired,
   }),
-  Director: propTypes.shape({
-    Name: propTypes.string.isRequired,
-    Bio: propTypes.string.isRequired,
-    Birth: propTypes.string.isRequired,
-  })
 };

@@ -11,7 +11,7 @@ import './index.scss';
 class MyMovieApplication extends React.Component {
   render() {
     return (
-      <Container>
+      <Container className='fluid'>
         <MainView />
       </Container>
     );

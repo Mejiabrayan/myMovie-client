@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import axios from "axios";
+import React from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 
-import { Link } from "react-router-dom";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Button, Container, Row, Col } from 'react-bootstrap';
 
-import "./movie-view.scss";
+import './movie-view.scss';
+import MovieInfo from './movie-info';
 
 export class MovieView extends React.Component {
   constructor() {
@@ -18,8 +18,8 @@ export class MovieView extends React.Component {
   }
 
   addMovie(movie, user) {
-    let username = localStorage.getItem("user");
-    let token = localStorage.getItem("token");
+    let username = localStorage.getItem('user');
+    let token = localStorage.getItem('token');
     console.log(movie);
     console.log(token);
 
@@ -39,8 +39,8 @@ export class MovieView extends React.Component {
   }
 
   removeFavMovie = (movie, user) => {
-    let token = localStorage.getItem("token");
-    let username = localStorage.getItem("user");
+    let token = localStorage.getItem('token');
+    let username = localStorage.getItem('user');
     console.log(movie);
     console.log(token);
     axios
@@ -55,7 +55,7 @@ export class MovieView extends React.Component {
         alert(`${movie.Title} has been removed from your list.`);
       })
       .catch((e) => {
-        console.log("Error");
+        console.log('Error');
       });
   };
 
@@ -63,52 +63,37 @@ export class MovieView extends React.Component {
     const { movie, user, onBackClick } = this.props;
 
     return (
-      <Container className="movie-view">
-        <Row>
-          <Col className="movie-poster">
-            <img src={movie.ImageURL} />
+      <Container>
+        <MovieInfo movie={movie} user={user} />
+        <Row className='movie-view-buttons'>
+          <Col>
+            <Button
+              className='button '
+              variant='primary'
+              onClick={() => {
+                onBackClick(null);
+              }}
+            >
+              Back
+            </Button>
+            <Button
+              className='button ml-2'
+              onClick={() => {
+                this.addMovie(movie, user);
+              }}
+            >
+              Add to favorites
+            </Button>
+            <Button
+              className='button ml-2'
+              onClick={() => {
+                this.removeFavMovie(movie, user);
+              }}
+            >
+              Remove from favorites
+            </Button>
           </Col>
         </Row>
-        <Row className="movie-title">
-          <Col className="label">Title: </Col>
-          <Col className="value">{movie.Title}</Col>
-        </Row>
-        <Row className="movie-description">
-          <Col className="label">Description: </Col>
-          <Col className="value">{movie.Description}</Col>
-        </Row>
-        <Row>
-          <Link to={`/directors/${movie.Director.Name}`}>
-            <Button variant="link">Director</Button>
-          </Link>
-          <Link to={`/genres/${movie.Genre.Name}`}>
-            <Button variant="link">Genre</Button>
-          </Link>
-        </Row>
-        <Button
-          
-          onClick={() => {
-            onBackClick(null);
-          }}
-        >
-          Back
-        </Button>
-        <Button
-          className="button ml-2"
-          onClick={() => {
-            this.addMovie(movie, user);
-          }}
-        >
-          Add to favorites
-        </Button>
-        <Button
-          className="button ml-2"
-          onClick={() => {
-            this.removeFavMovie(movie, user);
-          }}
-        >
-          Remove from favorites
-        </Button>
       </Container>
     );
   }
