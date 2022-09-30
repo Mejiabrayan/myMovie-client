@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Card, Button } from 'react-bootstrap/';
+import { Card, Button, Container, Row, Col } from 'react-bootstrap/';
 
 import { Link } from 'react-router-dom';
 
@@ -9,16 +9,25 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
 
     return (
-      <Card>
-        <Card.Img variant='top' src={movie.ImageURL} />
-        <Card.Body>
-          <Card.Title className='movie-title'>{movie.Title}</Card.Title>
-          
-          <Link to={`/movies/${movie._id}`}>
-            <Button variant='link'>Open</Button>
-          </Link>
-        </Card.Body>
-      </Card>
+      <>
+        {/* <Row className='mt-5'>
+          <Col sm={12} md={6} lg={8}> */}
+            <Card  className='movie-card' style={{ width: "15rem", margin: "12px" }}>
+              <Card.Img variant='top' src={movie.ImageURL}  style={{ height: "20rem" }} />
+              <Card.Body>
+                <Card.Title className='movie-title'>{movie.Title}</Card.Title>
+                <Card.Text className='movie-description'>
+                  {movie.Description}
+                </Card.Text>
+
+                <Link to={`/movies/${movie._id}`}>
+                  <Button variant='link'>Open</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          {/* </Col>
+        </Row> */}
+      </>
     );
   }
 }
@@ -37,5 +46,5 @@ MovieCard.propTypes = {
       Description: propTypes.string,
     }),
     ImageURL: propTypes.string,
-  }).isRequired
+  }).isRequired,
 };

@@ -1,36 +1,42 @@
 import React from 'react';
-import { Container, Row, Col, Button, Image } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './movie-view.scss';
 
 function MovieInfo({ movie }) {
   return (
-    <Container className='movie-view mt-3'>
-      <Row className='align-items-center'>
-        <Col className='movie-poster d-flex justify-content-center'>
-          <Image
-            style={{ height: '100%', width: '100%' }}
-            src={movie.ImageURL}
-          />
+    <Container
+      className='d-flex align-items-center justify-content-center'
+      fluid
+    >
+      <Row>
+        <Col sm={12} md={6} lg={8}>
+          <img src={movie.ImageURL} className='img-fluid rounded' />
         </Col>
       </Row>
-      <Row className='movie-title text-center p-4'>
-        <h4>Title: {movie.Title} </h4>
-      </Row>
-      <Row className='movie-description'>
-        <Col className='label'>Description: </Col>
-        <Col className='value'>{movie.Description}</Col>
-      </Row>
-      <Row className='p-4'>
-        <Col>
-          <Link to={`/directors/${movie.Director.Name}`}>
-            <Button variant='link'>Director</Button>
+      <Row>
+        <Col sm={12} md={6} lg={8} className='movie-info'>
+          <h1>{movie.Title}</h1>
+          {/* Testing UI */}
+          <div className='rating'>
+            <p className='text-secondary'>Rating</p>⭐️⭐️⭐️⭐️{' '}
+          </div>
+          <div className='actors mt-2'>
+            <p className='text-secondary'>Actors</p>
+            <p>{movie.Actors}</p>
+          </div>
+          <p>{movie.Description}</p>
+          <p className='text-secondary'>Director</p>
+          <p>{movie.Director.Name}</p>
+          <p className='text-secondary'>Genre</p>
+          <p>{movie.Genre.Name}</p>
+          <Link to={`/`}>
+            <Button variant='warning'>Back</Button>
           </Link>
         </Col>
-        <Col>
-          <Link to={`/genres/${movie.Genre.Name}`}>
-            <Button variant='link'>Genre</Button>
-          </Link>
-        </Col>
+      </Row>
+      <Row>
+        
       </Row>
     </Container>
   );

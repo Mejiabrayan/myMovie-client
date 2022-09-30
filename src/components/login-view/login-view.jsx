@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Container, Row, Button, Card, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import images from '../../images/myMovies-Background.jpeg';
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -47,38 +49,88 @@ export function LoginView(props) {
         })
         .catch((err) => {
           console.log(`no such user ${err}`);
+          alert('Your username or password is incorrect');
         });
     }
   };
 
-  return (
-    <Form className='mt-4'>
-      <Form.Group controlId='formUsername'>
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type='text'
-          placeholder='Enter username'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        {/* code added here to display validation error */}
-        {usernameErr && <p>{usernameErr}</p>}
-      </Form.Group>
+  // sets the background image for the login view
+  var background = {
+    backgroundImage: `url(${images})`,
 
-      <Form.Group controlId='formPassword'>
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type='text'
-          placeholder='Password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {/* code added here to display validation error */}
-        {passwordErr && <p>{passwordErr}</p>}
-      </Form.Group>
-      <Button className='mt-2' variant='primary' type='submit' onClick={handleSubmit}>
-        Login
-      </Button>
-    </Form>
+    backgroundSize: 'cover',
+    backgroundBlendMode: 'darken',
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    height: '100vh',
+    width: '100%',
+  };
+
+  return (
+    <div className='main-container' style={background}>
+      <Container>
+        <Row className='vh-100 d-flex justify-content-center align-items-center'>
+          <Col md={8} lg={6} xs={12}>
+            <div>
+              <Card className='shadow '>
+                <Card.Body>
+                  <div className='mb-3 mt-md-4'>
+                    <h2 className='fw-bold text-uppercase'>myMovies 🍿</h2>
+                    <p className='mb-5'>Login to your account</p>
+                    <div className='mb-3'>
+                      <Form>
+                        <Form.Group className='mb-3' controlId='formUsername'>
+                          <Form.Label className='text-center'>
+                            Username
+                          </Form.Label>
+                          <Form.Control
+                            type='text'
+                            placeholder='Enter username'
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                          />
+                          {/* code added here to display validation error */}
+                          {usernameErr && <p>{usernameErr}</p>}
+                        </Form.Group>
+
+                        <Form.Group className='mb-3' controlId='formPassword'>
+                          <Form.Label>Password</Form.Label>
+                          <Form.Control
+                            type='text'
+                            placeholder='Password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                          {/* code added here to display validation error */}
+                          {passwordErr && <p>{passwordErr}</p>}
+                        </Form.Group>
+                        <div className='d-grid'>
+                          <Button
+                            className='mt-2'
+                            variant='primary'
+                            type='submit'
+                            onClick={handleSubmit}
+                          >
+                            Login
+                          </Button>
+                        </div>
+                      </Form>
+                      <div className='mt-3'>
+                        <p className=' mb-0 text-center'>
+                          {' '}
+                          Don't have an account?{' '}
+                          <Link to={`/register`}>Register</Link>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }

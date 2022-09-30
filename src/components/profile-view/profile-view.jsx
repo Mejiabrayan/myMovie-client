@@ -20,6 +20,7 @@ export function ProfileView(props) {
   const token = localStorage.getItem('token');
   const [favoriteMoviesList, setFavoriteMoviesList] = useState([]);
 
+  // get user data from local storage and set it to user state variable
   const getUserData = () => {
     let user = localStorage.getItem('user');
     let token = localStorage.getItem('token');
@@ -40,7 +41,6 @@ export function ProfileView(props) {
       })
       .catch((error) => console.error(error));
   };
-
 
   // Delete Profile
   const handleDelete = (e) => {
@@ -88,9 +88,11 @@ export function ProfileView(props) {
   }, []);
 
   return (
-    <Container>
+    <>
       <Row>
-        <h3>Profile</h3>
+        <Col>
+          <h3>Profile</h3>
+        </Col>
       </Row>
       <Form>
         <Form.Group className='mb-3' controlId='username'>
@@ -130,25 +132,27 @@ export function ProfileView(props) {
           />
         </Form.Group>
       </Form>
-      <Row>
-        <Button className='mt-2' onClick={handleUpdate}>
+      <Row className='d-grid gap-2'>
+        <Button onClick={handleUpdate} size='md'>
           Update your profile
         </Button>
-        <Button className='mt-2 ml-4' onClick={handleDelete}>
+        <Button variant='danger' onClick={handleDelete}>
           Delete your profile
         </Button>
       </Row>
-      <Row className='fav-list'>
-        <h4>Favorite Movies:</h4>
-      </Row>
 
+      <Row>
+        <Col xs={12}>
+          <h4>Favorite Movies:</h4>
+        </Col>
+      </Row>
       <Row>
         {favoriteMoviesList.map((movie) => {
           return (
-            <Col xs={12} md={6} lg={3} key={movie._id}>
+            <Col xs={12} md={6} lg={3} key={movie._id} className='col'>
               <Link to={`/movies/${movie._id}`}>
                 <Card.Img
-                  className="mb-2"
+                  className='mb-2'
                   src={movie.ImageURL}
                   alt={movie.Title}
                 />
@@ -157,7 +161,11 @@ export function ProfileView(props) {
           );
         })}
       </Row>
-    </Container>
+
+      <Button variant='warning' onClick={() => props.onBackClick(null)}>
+        Back
+      </Button>
+    </>
   );
 }
 

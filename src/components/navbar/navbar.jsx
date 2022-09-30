@@ -1,6 +1,7 @@
 import React from 'react';
 import { Nav, Navbar, Button, Container } from 'react-bootstrap';
-
+import './navbar.scss';
+import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 
 export function MenuBar() {
   const user = localStorage.getItem('user');
@@ -26,30 +27,40 @@ export function MenuBar() {
   };
 
   return (
-    <Navbar
-      className='main-nav'
-      variant='dark'
-      bg='dark'
-      sticky='top'
-      expand='lg'
-    >
-      <Container className='fluid'>
+    <Navbar className='main-nav' sticky='top' expand='lg'>
+      <Container>
         <Navbar.Brand className='navbar-logo' href='/'>
           myMovies 🍿
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav ' />
-        <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='ml-auto'>
-            {isAuth() && <Nav.Link  href={`/users/${user}`}>{user}</Nav.Link>}
+        <Navbar.Collapse
+          id='responsive-navbar-nav'
+          className='justify-content-center'
+        >
+          <Nav className='me-auto nav'>
+            {isAuth() && (
+              <Nav.Link className='current-user' href={`/users/${user}`}>
+                {user}
+              </Nav.Link>
+            )}
             {isAuth() && (
               <Button variant='link' onClick={logOut}>
                 Logout
               </Button>
             )}
             {/* If they're not authenticated then use should either sign-in or sign-up */}
-            {!isAuth() && <Nav.Link href='/'>Sign-in</Nav.Link>}
-            {!isAuth() && <Nav.Link href='/register'>Sign-up</Nav.Link>}
+            {!isAuth() && (
+              <Nav.Link className='nav-links' href='/'>
+                Sign-in
+              </Nav.Link>
+            )}
+            {!isAuth() && (
+              <Nav.Link className='nav-links' href='/register'>
+                Sign-up
+              </Nav.Link>
+            )}
           </Nav>
+          <VisibilityFilterInput />
         </Navbar.Collapse>
       </Container>
     </Navbar>

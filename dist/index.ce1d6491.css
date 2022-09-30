@@ -1,56 +1,32 @@
-.my-movie {
-  color: #4682b4;
-}
 
-.label {
-  font-weight: bold;
-}
 
-.values {
-  margin-bottom: 20px;
-}
-
-.button {
+body {
   color: #fff;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  margin-left: 20px;
-  padding: 10px;
-  font-size: 16px;
 }
 
-.fav-movie {
-  margin-bottom: 15px;
-}
-
-.fav-movie figure {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin: auto;
-  position: relative;
-  overflow: hidden;
-}
-
-.fav-movie figure img {
-  height: 400px;
-  margin: auto;
-  display: block;
-}
-
-.fav-movie figure figcaption {
-  text-align: center;
-}
-
-button {
-  margin: auto;
-  display: block;
-}
-
-.card {
-  margin-bottom: 15px;
+.movie-info {
+  color: #fff;
+  border-radius: 10px;
 }
 
 
+
+
+
+.current-user {
+  text-transform: uppercase;
+}
+
+.main-nav {
+  background: #060d17 !important;
+}
+
+.main-nav .navbar-brand, .main-nav a {
+  color: #fff;
+}
+
+.main-nav a:hover {
+  color: #ede8e8;
+}
 
 /*# sourceMappingURL=index.ce1d6491.css.map */

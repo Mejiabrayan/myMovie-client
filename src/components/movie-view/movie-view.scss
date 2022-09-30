@@ -1,18 +1,9 @@
 // Path: src/components/movie-view/movie-view.scss
-.label {
-  font-weight: bold;
+body {
+  color: white;
 }
 
-.values {
-  margin-bottom: 20px;
-}
-
-.button {
+.movie-info {
   color: #ffffff;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  margin-left: 20px;
+  border-radius: 10px;
 }

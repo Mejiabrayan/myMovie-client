@@ -1,0 +1,17 @@
+.current-user {
+  text-transform: uppercase;
+}
+
+.main-nav {
+  background: #060d17 !important;
+
+  .navbar-brand {
+    color: white;
+  }
+  a {
+    color: white;
+  }
+  a:hover {
+    color: #ede8e8;
+  }
+}
