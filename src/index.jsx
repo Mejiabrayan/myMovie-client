@@ -19,7 +19,7 @@ class MyMovieApplication extends React.Component {
   render() {
     return (
       <Provider store={store}>
-      <Container style={{background: '#060d17 '}} >
+      <Container style={{background: '#060d17 '}} fluid >
         <MainView/>
       </Container>
       </Provider>

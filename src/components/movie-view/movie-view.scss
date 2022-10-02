@@ -1,9 +1,18 @@
 // Path: src/components/movie-view/movie-view.scss
-body {
-  color: white;
-}
+
 
 .movie-info {
   color: #ffffff;
   border-radius: 10px;
+}
+
+.movie-title {
+  font-size: 2em;
+  font-weight: bold;
+  inline-size: 100%;
+  writing-mode: horizontal-tb;
+}
+
+.add-btn i {
+  vertical-align: middle;
 }

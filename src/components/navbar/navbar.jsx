@@ -2,6 +2,7 @@ import React from 'react';
 import { Nav, Navbar, Button, Container } from 'react-bootstrap';
 import './navbar.scss';
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
+import { BiMoviePlay } from 'react-icons/bi';
 
 export function MenuBar() {
   const user = localStorage.getItem('user');
@@ -30,7 +31,7 @@ export function MenuBar() {
     <Navbar className='main-nav' sticky='top' expand='lg'>
       <Container>
         <Navbar.Brand className='navbar-logo' href='/'>
-          myMovies 🍿
+        <BiMoviePlay className='navbar-logo-icon' />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav ' />
         <Navbar.Collapse

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { GrStatusPlaceholder } from 'react-icons/gr';
+
+import { AiOutlineUser } from 'react-icons/ai';
 
 import './profile-view.scss';
 
@@ -89,77 +92,109 @@ export function ProfileView(props) {
 
   return (
     <>
-      <Row>
+      <Row className='header'>
         <Col>
           <h3>Profile</h3>
+          <AiOutlineUser className='user-icon' />
         </Col>
       </Row>
-      <Form>
-        <Form.Group className='mb-3' controlId='username'>
-          <Form.Label>Username:</Form.Label>
-          <Form.Control
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
-            type='text'
-            placeholder='username'
-          />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            onChange={(e) => setPassword(e.target.value)}
-            type='password'
-            value={password}
-            placeholder='Password'
-          />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='email'>
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            type='email'
-            placeholder='Enter new email'
-          />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='birthday'>
-          <Form.Label>Birthday:</Form.Label>
-          <Form.Control
-            onChange={(e) => setBirthday(e.target.value)}
-            value={birthday}
-            type='date'
-            placeholder='birthday'
-          />
-        </Form.Group>
-      </Form>
-      <Row className='d-grid gap-2'>
-        <Button onClick={handleUpdate} size='md'>
-          Update your profile
-        </Button>
-        <Button variant='danger' onClick={handleDelete}>
-          Delete your profile
-        </Button>
+      <Row className='justify-content-center'>
+        <Col md={3} lg={8} sm={12}>
+          <Form>
+            <Form.Group className='mb-3' controlId='username'>
+              <Form.Label className='label-text'>Username:</Form.Label>
+              <Form.Control
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+                type='text'
+                placeholder='username'
+              />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='password'>
+              <Form.Label className='label-text'>Password</Form.Label>
+              <Form.Control
+                onChange={(e) => setPassword(e.target.value)}
+                type='password'
+                value={password}
+                placeholder='Password'
+              />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='email'>
+              <Form.Label className='label-text'>Email address</Form.Label>
+              <Form.Control
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                type='email'
+                placeholder='Enter new email'
+              />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='birthday'>
+              <Form.Label className='label-text'>Birthday:</Form.Label>
+              <Form.Control
+                onChange={(e) => setBirthday(e.target.value)}
+                value={birthday}
+                type='date'
+                placeholder='birthday'
+              />
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
+      <Row className='justify-content-center'>
+        <Col md={3} lg={8} sm={12}>
+          <Button
+            className='update-button mr-2 btn'
+            variant='primary'
+            type='submit'
+            onClick={handleUpdate}
+          >
+            Update
+          </Button>
+          <Button
+            className='delete-button mr-2 btn'
+            variant='danger'
+            type='submit'
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+        </Col>
       </Row>
 
-      <Row>
-        <Col xs={12}>
-          <h4>Favorite Movies:</h4>
+      <Row className='justify-content-center text-center'>
+        <Col>
+          <h4 className='favorite-movie-title'>Favorite Movies</h4>
         </Col>
       </Row>
-      <Row>
+      <Row className='favorite-content'>
         {favoriteMoviesList.map((movie) => {
           return (
             <Col xs={12} md={6} lg={3} key={movie._id} className='col'>
               <Link to={`/movies/${movie._id}`}>
+                <Card className='card' style={{ width: '18rem',background:'#10161D', color: '#fff'  }}>
+                <Card.Body className='card-body rounded'>
                 <Card.Img
                   className='mb-2'
                   src={movie.ImageURL}
                   alt={movie.Title}
                 />
+              </Card.Body>
+              <Card.Header className='card-header'>
+                
+                <Card.Title className='card-title'>{movie.Title}</Card.Title>
+              </Card.Header>
+              </Card>
               </Link>
             </Col>
           );
-        })}
+        })}{' '}
+        :
+        {!favoriteMoviesList.length && (
+          <div className='text-center'>
+            <span className='placeholder-text'>No movies added</span>
+
+          </div>
+        )}
       </Row>
 
       <Button variant='warning' onClick={() => props.onBackClick(null)}>

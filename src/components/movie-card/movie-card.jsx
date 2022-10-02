@@ -8,16 +8,27 @@ export class MovieCard extends React.Component {
   render() {
     const { movie } = this.props;
 
+    const movieDescription =
+      movie.Description.length > 100
+      ? movie.Description.slice(0, 50) + '...' : ' ';
     return (
       <>
-        {/* <Row className='mt-5'>
-          <Col sm={12} md={6} lg={8}> */}
-            <Card  className='movie-card' style={{ width: "15rem", margin: "12px" }}>
-              <Card.Img variant='top' src={movie.ImageURL}  style={{ height: "20rem" }} />
+        <Row className='justify-content-center'>
+          <Col lg={8} md={3} sm={12}>
+            <Card
+              className='movie-card shadow-lg rounded'
+              style={{ width: '15rem', margin: '12px' }}
+            >
+              <Card.Img
+                variant='top'
+                src={movie.ImageURL}
+                style={{ height: '20rem' }}
+              />
               <Card.Body>
                 <Card.Title className='movie-title'>{movie.Title}</Card.Title>
                 <Card.Text className='movie-description'>
-                  {movie.Description}
+                  {movieDescription}
+                  {movie.Description }
                 </Card.Text>
 
                 <Link to={`/movies/${movie._id}`}>
@@ -25,8 +36,8 @@ export class MovieCard extends React.Component {
                 </Link>
               </Card.Body>
             </Card>
-          {/* </Col>
-        </Row> */}
+          </Col>
+        </Row>
       </>
     );
   }

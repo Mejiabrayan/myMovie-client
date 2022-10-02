@@ -5,17 +5,14 @@ import './movie-view.scss';
 
 function MovieInfo({ movie }) {
   return (
-    <Container
-      className='d-flex align-items-center justify-content-center'
-      fluid
-    >
-      <Row>
+    <Container className='movie-info'>
+      <Row className='justify-content-center d-flex align-items-center '>
         <Col sm={12} md={6} lg={8}>
           <img src={movie.ImageURL} className='img-fluid rounded' />
         </Col>
       </Row>
       <Row>
-        <Col sm={12} md={6} lg={8} className='movie-info'>
+        <Col sm={12} md={5} lg={8} className='movie-info'>
           <h1>{movie.Title}</h1>
           {/* Testing UI */}
           <div className='rating'>
@@ -35,9 +32,7 @@ function MovieInfo({ movie }) {
           </Link>
         </Col>
       </Row>
-      <Row>
-        
-      </Row>
+   
     </Container>
   );
 }

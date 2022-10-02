@@ -3,6 +3,7 @@ import { Form, Container, Row, Button, Card, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import images from '../../images/myMovies-Background.jpeg';
+import {BiMoviePlay} from 'react-icons/bi';
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -73,10 +74,10 @@ export function LoginView(props) {
         <Row className='vh-100 d-flex justify-content-center align-items-center'>
           <Col md={8} lg={6} xs={12}>
             <div>
-              <Card className='shadow '>
+              <Card className='shadow ' style={{background: ' #09121f', color: '#fff'}}>
                 <Card.Body>
                   <div className='mb-3 mt-md-4'>
-                    <h2 className='fw-bold text-uppercase'>myMovies 🍿</h2>
+                    <h2 className='fw-bold text-uppercase'>myMovies <BiMoviePlay/></h2>
                     <p className='mb-5'>Login to your account</p>
                     <div className='mb-3'>
                       <Form>

@@ -7,7 +7,7 @@ import { Button, Form, Row, Col, Container, Card } from 'react-bootstrap';
 import axios from 'axios';
 import './registration-view.scss';
 import images from '../../images/myMovies-Background.jpeg';
-
+import {BiMoviePlay} from 'react-icons/bi';
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
@@ -87,10 +87,10 @@ export function RegistrationView(props) {
         <Row className='vh-100 d-flex justify-content-center align-items-center'>
           <Col md={4} lg={6} xs={12}>
             <div>
-              <Card className='shadow'>
+              <Card className='shadow' style={{background: ' #09121f', color: '#fff'}}>
                 <Card.Body>
                   <div className='mb-3 mt-md-4'>
-                    <h2 className='fw-bold text-uppercase'>myMovies 🍿</h2>
+                    <h2 className='fw-bold text-uppercase'>myMovies <BiMoviePlay/></h2>
                     <p className='mb-5'>Sign up</p>
                     <div className='mb-3'>
                       <Form>
