@@ -1,4 +1,5 @@
 {
+  "homepage": "https://Mejiabrayan.github.io/myMovie-client",
   "name": "mymovie-client",
   "version": "1.0.0",
   "description": "myMovie is an application that allows you to register an account and watch your favorite movies",
@@ -7,7 +8,9 @@
   "scripts": {
     "start": "parcel",
     "build": "parcel build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -18,7 +21,6 @@
   "bugs": {
     "url": "https://github.com/Mejiabrayan/myMovie-client/issues"
   },
-  "homepage": "https://github.com/Mejiabrayan/myMovie-client#readme",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0",
     "@types/react": "^18.0.18",
@@ -29,8 +31,16 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "bootstrap": "^5.2.1",
+    "gh-pages": "^4.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-bootstrap": "^2.5.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^5.3.0",
+    "redux": "^4.2.0",
+    "redux-devtools-extension": "^2.13.9"
   }
 }

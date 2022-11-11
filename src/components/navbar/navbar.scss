@@ -1,0 +1,22 @@
+.current-user {
+  text-transform: uppercase;
+}
+
+.main-nav {
+  background: transparent; 
+
+  .navbar-brand {
+    color: white;
+  }
+  a {
+    color: white;
+  }
+  a:hover {
+    color: #ede8e8;
+  }
+
+}
+
+.navbar-toggler-icon {
+  color: white;
+}

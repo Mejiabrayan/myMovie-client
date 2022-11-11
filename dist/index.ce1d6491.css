@@ -1,5 +1,80 @@
-.my-movie {
-  color: #4682b4;
+html {
+  background-color: #060d17;
+}
+
+.movie-info {
+  color: #fff;
+  border-radius: 10px;
+}
+
+.movie-title {
+  inline-size: 100%;
+  writing-mode: horizontal-tb;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.add-btn i {
+  vertical-align: middle;
+}
+
+.header {
+  text-align: center;
+  color: #fff;
+}
+
+.label-text {
+  color: #fff;
+}
+
+.user-icon {
+  color: #fff;
+  font-size: 2em;
+}
+
+.favorite-movie-title {
+  color: #fff;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+.favorite-content {
+  background-color: #060d17;
+  margin-top: 20px;
+}
+
+.placeholder-text {
+  color: #fff;
+}
+
+.favorite-content {
+  flex-wrap: nowrap;
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+
+
+.current-user {
+  text-transform: uppercase;
+}
+
+.main-nav {
+  background: #060d17 !important;
+}
+
+.main-nav .navbar-brand, .main-nav a {
+  color: #fff;
+}
+
+.main-nav a:hover {
+  color: #ede8e8;
+}
+
+.navbar-toggler-icon span {
+  color: #fff;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */
