@@ -1,7 +1,9 @@
 # myMovies
 ## Overview
 
-This is a client-side of a movie database App called myMovies  which fetches data from its server-side (CinemaFlix-API). It allows users to search for and save information about different movies, directors, and genres. Users will also be able to register, update their personal information, and create a list of their favorite movies.
+![Image](/src/images/mymovies.png)
+
+This is a client-side of a movie database App called myMovies  which fetches data from its server-side (MyMovies-API). It allows users to search for and save information about different movies, directors, and genres. Users will also be able to register, update their personal information, and create a list of their favorite movies.
 
 A user need to first create an account (register ) to access the full features of the app.
 
