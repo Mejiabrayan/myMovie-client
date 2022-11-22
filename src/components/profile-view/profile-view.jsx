@@ -2,13 +2,22 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { GrStatusPlaceholder } from 'react-icons/gr';
+import favoriteMovies from './favorite-movies';
+``;
 
 import { AiOutlineUser } from 'react-icons/ai';
 
 import './profile-view.scss';
 
-import { Container, Col, Row, Button, Card, Form, Stack} from 'react-bootstrap';
+import {
+  Container,
+  Col,
+  Row,
+  Button,
+  Card,
+  Form,
+  Stack,
+} from 'react-bootstrap';
 
 export function ProfileView(props) {
   const [username, setUsername] = useState('');
@@ -140,7 +149,7 @@ export function ProfileView(props) {
           </Form>
         </Col>
       </Row>
-      <Stack gap={2} className="col-md-5 mx-auto">
+      <Stack gap={2} className='col-md-5 mx-auto'>
         <Button
           className='update-button'
           variant='outline-primary'
@@ -159,27 +168,6 @@ export function ProfileView(props) {
         </Button>
       </Stack>
 
-{/* 
-      <Row className='justify-content-center'>
-        <Col md={3} lg={8} sm={12}>
-          <Button
-            className='update-button mr-2 btn'
-            variant='primary'
-            type='submit'
-            onClick={handleUpdate}
-          >
-            Update
-          </Button>
-          <Button
-            className='delete-button mr-2 btn'
-            variant='danger'
-            type='submit'
-            onClick={handleDelete}
-          >
-            Delete
-          </Button>
-        </Col>
-      </Row> */}
 
       <Row className='justify-content-center text-center'>
         <Col>
@@ -191,30 +179,35 @@ export function ProfileView(props) {
           return (
             <Col xs={12} md={6} lg={3} key={movie._id} className='col'>
               <Link to={`/movies/${movie._id}`}>
-                <Card className='card' style={{ width: '18rem',background:'#10161D', color: '#fff'  }}>
-                <Card.Body className='card-body rounded'>
-                <Card.Img
-                  className='mb-2'
-                  src={movie.ImageURL}
-                  alt={movie.Title}
-                />
-              </Card.Body>
-              <Card.Header className='card-header'>
-                
-                <Card.Title className='card-title'>{movie.Title}</Card.Title>
-              </Card.Header>
-              </Card>
+                <Card
+                  className='card'
+                  style={{
+                    width: '18rem',
+                    background: '#10161D',
+                    color: '#fff',
+                  }}
+                >
+                  <Card.Body className='card-body rounded'>
+                    <Card.Img
+                      className='mb-2'
+                      src={movie.ImageURL}
+                      alt={movie.Title}
+                    />
+                  </Card.Body>
+                  <Card.Header className='card-header'>
+                    <Card.Title className='card-title'>
+                      {movie.Title}
+                    </Card.Title>
+                  </Card.Header>
+                </Card>
               </Link>
             </Col>
           );
         })}{' '}
         :
-        {!favoriteMoviesList.length && (
-          <div className='text-center'>
-            <span className='placeholder-text'>No movies added</span>
-
-          </div>
-        )}
+      </Row>
+      <Row className='justify-content-center text-center'>
+        <favoriteMoviesList />
       </Row>
 
       <Button variant='outline-warning' onClick={() => props.onBackClick(null)}>
