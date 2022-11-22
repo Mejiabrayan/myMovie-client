@@ -35,7 +35,7 @@ export class MovieCard extends React.Component {
         </Row>
         {/* { 
     movie.Featured === true && (
-      <Row>
+      <Row>status
       <Col lg={8} md={4} sm={12} xs={6}>
         <Card
           className='movie-card shadow-lg rounded'

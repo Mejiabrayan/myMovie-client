@@ -3,7 +3,6 @@ import { Nav, Navbar, Button, Container } from 'react-bootstrap';
 import './navbar.scss';
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 import { BiMoviePlay } from 'react-icons/bi';
-import visibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 
 export function MenuBar() {
   const user = localStorage.getItem('user');
