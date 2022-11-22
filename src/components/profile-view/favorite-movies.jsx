@@ -3,19 +3,18 @@ import { Link } from 'react-router-dom';
 
 export function FavoriteMovies(favoriteMoviesList) {
   return (
-    <div>
+  //  Build a list of favorite movies here
+    <div className="favorite-movies">
       <h2>Favorite Movies</h2>
-
-      {favoriteMoviesList.map((movie) => {
-        return (
-          <div key={movie._id}>
-            <img src={movie.ImageURL} alt={movie.Title} />
+      <div className="movies">
+        {favoriteMoviesList.map((movie) => (
+          <div className="movie" key={movie._id}>
             <Link to={`/movies/${movie._id}`}>
-              <h4>{movie.Title}</h4>
+              <img className="movie-poster" src={movie.ImageURL} />
             </Link>
           </div>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 }
